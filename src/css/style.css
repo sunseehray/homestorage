@@ -1,6 +1,6 @@
 :root {
-  --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-body: 'Poppins', Helvetica, sans-serif;
+  --font-headline: 'Calistoga', Arial, sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -28,15 +28,16 @@ img {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 10px;
 }
 .logo {
   line-height: 60px;
-  width: 245px;
+  width: 260px;
   overflow: hidden;
   display: flex;
   font-size: 30px;
-  text-align: right;
+  text-align: center;
   font-family: var(--font-headline);
 }
 .logo img {
@@ -45,7 +46,7 @@ header {
 }
 .logo a {
   text-decoration: none;
-  color: var(--font-body);
+  color: var(--primary-color);
 }
 .hero {
   position: relative;
@@ -78,7 +79,31 @@ header {
 }
 /* utility classes */
 .highlight {
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
+}
+
+.main-menu li {
+  background-color: var(--primary-color);
+  list-style: none;
+  width: 80%;
+  margin: 1em 0;
+  padding: .8em;
+  box-shadow: 2px 2px 3px var(--light-grey);
+  border-radius: .5em;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.main-menu img {
+  width: 1.5em;
+}
+
+.main-menu a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  margin-left: 1em;
 }
 
 button {
@@ -98,16 +123,22 @@ button {
 
 /* Cart icon styles */
 .cart {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
   padding-top: 1em;
   position: relative;
   text-align: center;
 }
 
-.cart svg {
-  width: 25px;
+.cart img {
+  width: 50px;
+  box-shadow: 0 0 3px var(--dark-grey);
+  border-radius: 1em;
+  padding: .2em;
 }
-.cart:hover svg {
-  fill: gray;
+.cart img:hover {
+  opacity: .7;
 }
 
 /* End cart icon styles */
