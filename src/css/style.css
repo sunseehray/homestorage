@@ -1,6 +1,6 @@
 :root {
-  --font-body: 'Poppins', Helvetica, sans-serif;
-  --font-headline: 'Calistoga', Arial, sans-serif;
+  --font-body: "Poppins", Helvetica, sans-serif;
+  --font-headline: "Calistoga", Arial, sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -57,7 +57,7 @@ header {
   color: var(--dark-grey);
   background-color: white;
   padding: 1em;
-  border: 2px solid rgba(192,192,192,0.5);
+  border: 2px solid rgba(192, 192, 192, 0.5);
 }
 /* utility classes */
 .highlight {
@@ -77,9 +77,9 @@ h3 {
   list-style: none;
   width: 70%;
   margin: 1em auto;
-  padding: .8em;
+  padding: 0.8em;
   box-shadow: 2px 2px 3px var(--light-grey);
-  border-radius: .5em;
+  border-radius: 0.5em;
   text-align: left;
 }
 
@@ -121,7 +121,7 @@ button {
 .cart {
   display: flex;
   flex-direction: row;
-  column-gap: .5em;
+  column-gap: 0.5em;
   position: relative;
   text-align: center;
 }
@@ -130,10 +130,10 @@ button {
   width: 48px;
   box-shadow: 0 0 3px var(--dark-grey);
   border-radius: 1em;
-  padding: .2em;
+  padding: 0.2em;
 }
 .cart img:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 /* End cart icon styles */
