@@ -1,21 +1,19 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter, setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
-import ProductList from "./ProductList.mjs";
-import { getTerm } from "./search";
 
 const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
 loadHeaderFooter(headerPath, footerPath);
 
-// const category = getParam("category");
-// const dataSource = new ExternalServices();
-// const element = document.querySelector(".product-list");
-// const listing = new ProductList(category, dataSource, element);
+document.querySelector("#search-button").addEventListener("click", () => {
+    const term = document.querySelector("#search-term").value;
+    setLocalStorage("searchTerm", term);
+});
 
-// listing.init();
 
 const dataSource = new ExternalServices();
-const term = getTerm();
-const results = dataSource.findProductBySearchTerm(term);
-console.log(results);
+const queryTerm = getLocalStorage("searchTerm") || "milk";
+const json = await dataSource.findProductBySearchTerm(queryTerm);
+console.log(json);
+//console.log(.PromiseResult);
 
