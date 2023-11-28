@@ -161,7 +161,7 @@ button {
 #search-form {
   display: flex;
   flex-direction: row;
-  column-gap: .2em;
+  column-gap: 0.2em;
   margin: auto 5%;
 }
 #search-form input {
