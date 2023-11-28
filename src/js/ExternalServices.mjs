@@ -14,16 +14,16 @@ export default class ExternalServices {
     //this.category = category;
     //this.path = `../json/${this.category}.json`;
   }
-  async getData(term) {
-    const response = await fetch(baseURL + `${term}`);
-    const data = await convertToJson(response);
-    return data.Result;
-  }
-  async findProductById(id) {
-    const response = await fetch(baseURL + `${id}`);
-    const data = await convertToJson(response);
-    return data.Result;
-  }
+  // async getData(term) {
+  //   const response = await fetch(baseURL + `${term}`);
+  //   const data = await convertToJson(response);
+  //   return data.Result;
+  // }
+  // async findProductById(id) {
+  //   const response = await fetch(baseURL + `${id}`);
+  //   const data = await convertToJson(response);
+  //   return data.Result;
+  // }
 
   async findProductBySearchTerm(term) {
     const url = baseURL + term;
@@ -45,15 +45,15 @@ export default class ExternalServices {
     }
   }
 
-  async checkout(payload) {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-      // timeout: 120000,
-    };
-    return await fetch("https://wdd330-backend.onrender.com:3000/checkout/", options).then(convertToJson);
-  }
+  // async checkout(payload) {
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(payload),
+  //     // timeout: 120000,
+  //   };
+  //   return await fetch("https://wdd330-backend.onrender.com:3000/checkout/", options).then(convertToJson);
+  // }
 }
