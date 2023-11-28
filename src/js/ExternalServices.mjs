@@ -14,18 +14,14 @@ export default class ExternalServices {
     //this.category = category;
     //this.path = `../json/${this.category}.json`;
   }
-  // async getData(term) {
-  //   const response = await fetch(baseURL + `${term}`);
-  //   const data = await convertToJson(response);
-  //   return data.Result;
-  // }
+
   async findProductById(id) {
     const response = await fetch(baseURL + `${id}`);
     const data = await convertToJson(response);
     return data.Result;
   }
 
-  async findProductBySearchTerm() {
+  async getSearchProducts() {
     const term = document.getElementById("search-term").value;
     const url = baseURL + term;
     const options = {
@@ -39,7 +35,7 @@ export default class ExternalServices {
     try {
       const response = await fetch(url, options);
       const result = await convertToJson(response);
-      console.log(result.hints);
+      return result.hints;
     } catch (error) {
       throw (error.message);
       
