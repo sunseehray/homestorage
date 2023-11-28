@@ -25,7 +25,8 @@ export default class ExternalServices {
   //   return data.Result;
   // }
 
-  async findProductBySearchTerm(term) {
+  async findProductBySearchTerm() {
+    const term = document.getElementById("search-term").value;
     const url = baseURL + term;
     const options = {
       method: "GET",
@@ -38,7 +39,7 @@ export default class ExternalServices {
     try {
       const response = await fetch(url, options);
       const result = await convertToJson(response);
-      return result;
+      console.log(result);
     } catch (error) {
       throw (error.message);
       
