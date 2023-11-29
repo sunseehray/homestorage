@@ -2,12 +2,24 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function searchResultDetailTemplate(item) {
+    let brand;
+    let image;
+    if (!item.food.brand) {
+        brand = "Generic";
+    } else {
+        brand = item.food.brand;
+    }
+    if (!item.food.image) {
+        image = "../images/filled-basket.jpg";
+    } else {
+        image = item.food.image;
+    }
     return `<section class="item-detail">
-        <h3>${item.food.brand}</h3>
+        <h3>${brand}</h3>
         <h2 class="divider">${item.food.label}</h2>
         <img
             class="divider"
-            src="${item.food.image}"
+            src="${image}"
             alt="${item.food.label}"
         />
         <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
@@ -56,6 +68,7 @@ export default class SearchResult {
         const groceryList = getLocalStorage("grocery-list") || [];
         const searchId = this.foodId;
         const foundItem = groceryList.find((item) => item.food.foodId === searchId);
+        // MODIFY THIS PART TO INCLUDE QUANTITY AS WELL or do it in the grocery list instead
         if (!foundItem) {
             groceryList.push(this.food);
             setLocalStorage("grocery-list", groceryList);

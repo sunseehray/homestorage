@@ -2,6 +2,7 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
+import ProductListing from "./SearchList.mjs";
 
 // load header and footer
 const headerPath = "../partials/header.html";
@@ -9,6 +10,7 @@ const footerPath = "../partials/footer.html";
 loadHeaderFooter(headerPath, footerPath);
 
 const dataSource = new ExternalServices();
+setLocalStorage("food-id", "");
 
 document
   .querySelector("#search-button")
@@ -16,18 +18,15 @@ document
     e.preventDefault();
     const data = await dataSource.getSearchProducts();
     setLocalStorage("search-results", data);
-
-    // try specific target
-    // const itemId = data[0].food.foodId;
-    // const product = data.find((item) => item.food.foodId === itemId);
-    // console.log(product);
-
+    // const listing = new ProductListing;
+    // const element = document.querySelector(".product-list");
+    // listing.init(element, "afterBegin");
     console.log(data);
     renderSearchResults();
 
     // try if we can get the food id when user clicks the image or h2
-    const selector = document.querySelector(".see-detail");
-    saveId(selector);
+    // const selector = document.querySelector(".see-detail");
+    // saveId(selector);
   });
 
 function renderSearchResults() {
