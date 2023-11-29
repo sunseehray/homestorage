@@ -22,7 +22,7 @@ document
     // const product = data.find((item) => item.food.foodId === itemId);
     // console.log(product);
 
-      console.log(data);
+    console.log(data);
     renderSearchResults();
   });
 
