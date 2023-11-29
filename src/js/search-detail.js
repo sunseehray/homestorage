@@ -14,7 +14,7 @@ const data = getLocalStorage("search-results");
 console.log(data);
 
 //extract the food from the data using the id
-const foundItem = data.find((item) => item.food.foodId = foodId);
+const foundItem = data.find((item) => (item.food.foodId = foodId));
 console.log(foundItem);
 
 // use this food data to generate the content of this page

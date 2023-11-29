@@ -25,9 +25,9 @@ document
     console.log(data);
     renderSearchResults();
 
-     // try if we can get the food id when user clicks the image or h2
-     const selector = document.querySelector(".see-detail");
-     saveId(selector);
+    // try if we can get the food id when user clicks the image or h2
+    const selector = document.querySelector(".see-detail");
+    saveId(selector);
   });
 
 function renderSearchResults() {
@@ -70,4 +70,3 @@ function saveId(selector) {
     setLocalStorage("food-id", id);
   });
 }
-
