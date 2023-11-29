@@ -17,7 +17,12 @@ document
     const data = await dataSource.getSearchProducts();
     setLocalStorage("search-results", data);
 
-    //   console.log(data);
+    // try specific target
+    // const itemId = data[0].food.foodId;
+    // const product = data.find((item) => item.food.foodId === itemId);
+    // console.log(product);
+
+      console.log(data);
     renderSearchResults();
   });
 
@@ -34,24 +39,24 @@ function searchResultTemplate(item) {
   } else {
     image = item.food.image;
   }
-
-  let servingSize;
-  if (!item.food.servingsPerContainer) {
-    servingSize = "-";
+  let brand;
+  if (!item.food.brand) {
+    brand = "Generic";
   } else {
-    servingSize = item.food.servingsPerContainer;
+    brand = item.food.brand;
   }
+
   const newItem = `<li class="result-card divider">
         <a href="" class="result-card__image">
             <img
                 src="${image}"
-                alt="${item.food.label}"
+                alt="${brand}${item.food.label}"
             />
         </a>
         <a href="#">
-            <h2 class="card__name">${item.food.brand} ${item.food.label}</h2>
+            <h2 class="card__name">${brand} ${item.food.label}</h2>
         </a>
-        <p class="result-card__serving">Serving Size: ${servingSize}</p>
+        <p class="result-card__calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
         </li>`;
 
   return newItem;

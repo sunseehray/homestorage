@@ -1,3 +1,5 @@
+import { getLocalStorage } from "./utils.mjs";
+
 const baseURL = import.meta.env.VITE_SERVER_URL
 
 function convertToJson(res) {
@@ -14,11 +16,19 @@ export default class ExternalServices {
     //this.category = category;
     //this.path = `../json/${this.category}.json`;
   }
-
-  async findProductById(id) {
-    const response = await fetch(baseURL + `${id}`);
-    const data = await convertToJson(response);
-    return data.Result;
+  // this findProductById may not be needed here since search result details will be generated based on local storage instead
+  findProductById(id) {
+    try {
+      // get the locally saved search results
+      const data = getLocalStorage("search-result");
+      // from this array, return the target item
+      const targetItem = data.find((item) => item.food.foodId === id);
+      console.log(targetItem);
+      return targetItem;
+    } catch (error) {
+      console.log(error.message);
+    }
+    
   }
 
   async getSearchProducts() {

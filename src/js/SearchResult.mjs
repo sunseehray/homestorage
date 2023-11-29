@@ -1,20 +1,81 @@
 //this helps generate search results
 import ExternalServices from "./ExternalServices.mjs";
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+
+function searchResultDetailTemplate(item) {
+    return `<section class="item-detail">
+        <h3>${item.food.brand}</h3>
+        <h2 class="divider">${item.food.label}</h2>
+        <img
+            class="divider"
+            src="${item.food.image}"
+            alt="${item.food.label}"
+        />
+        <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
+        <div class="item-detail__add">
+            <button id="addToInventory" data-id="${item.food.foodId}">Add to Inventory</button>
+            <button id="addToGroceryList" data-id="${item.food.foodId}">Add to Grocery List</button>
+        </section>`;
+}
 
 export default class SearchResult {
-    constructor(foodId, dataSource) {
+    constructor(foodId) {
         this.foodId = foodId;
         this.food = {};
-        this.dataSource = dataSource;
+        this.dataSource = getLocalStorage("search-results");
     }
 
     async init() {
-        this.food = await this.dataSource.findProductBySearchTerm();
+        // removed await since dataSource will be from localstorage "search-results"
+        this.food = findProductById(this.dataSource, this.foodId);
+        this.renderSearchResultDetail("main");
+        document
+            .getElementById("addToInventory")
+            .addEventListener("click", this.addToInventory.bind(this));
+    }
+
+    addToInventory() {
+        const inventory = getLocalStorage("inventory") || [];
+        const searchId = this.foodId;
+        const foundItem = inventory.find((item) => item.food.foodId === searchId);
+        const foundItemIndex = inventory.findIndex((item) => item.food.foodId === searchId);
+        if (foundItem) {
+            inventory[foundItemIndex].InventoryQuantity += 1;
+            setLocalStorage("inventory", inventory);
+        } else {
+            this.food.InventoryQuantity = 1;
+            inventory.push(this.food);
+            setLocalStorage("inventory", inventory);
+        }
+    }
+
+    addToGroceryList() {
+        const groceryList = getLocalStorage("grocery-list") || [];
+        const searchId = this.foodId;
+        const foundItem = groceryList.find((item) => item.food.foodId === searchId);
+        if (!foundItem) {
+            groceryList.push(this.food);
+            setLocalStorage("grocery-list", groceryList);
+        }
+    }
+
+    renderSearchResultDetail(selector) {
+        const element = document.querySelector(selector);
+        element.insertAdjacentHTML(
+            "afterBegin",
+            searchResultDetailTemplate(this.product)
+        );
     }
 }
-async function GenerateResults() {
-    const dataSource = new ExternalServices;
-    dataSource.findProductBySearchTerm()
-}
 
+
+function findProductById(searchArray, id) {
+    try {
+      const targetItem = searchArray.find((item) => item.food.foodId === id);
+      console.log(targetItem);
+      return targetItem;
+    } catch (error) {
+      console.log(error.message);
+    }
+    
+  }
