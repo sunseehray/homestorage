@@ -1,5 +1,4 @@
 //this helps generate search results
-import ExternalServices from "./ExternalServices.mjs";
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function searchResultDetailTemplate(item) {
@@ -19,19 +18,23 @@ function searchResultDetailTemplate(item) {
 }
 
 export default class SearchResult {
-    constructor(foodId) {
-        this.foodId = foodId;
-        this.food = {};
-        this.dataSource = getLocalStorage("search-results");
+    constructor(foodItem) {
+        this.foodId = foodItem.food.foodId;
+        this.food = foodItem;
     }
 
     async init() {
         // removed await since dataSource will be from localstorage "search-results"
-        this.food = findProductById(this.dataSource, this.foodId);
+        // this.food = findProductById(this.dataSource, this.foodId);
         this.renderSearchResultDetail("main");
+
         document
             .getElementById("addToInventory")
             .addEventListener("click", this.addToInventory.bind(this));
+
+        document
+            .getElementById("addToGroceryList")
+            .addEventListener("click", this.addToGroceryList.bind(this));
     }
 
     addToInventory() {
@@ -63,19 +66,7 @@ export default class SearchResult {
         const element = document.querySelector(selector);
         element.insertAdjacentHTML(
             "afterBegin",
-            searchResultDetailTemplate(this.product)
+            searchResultDetailTemplate(this.food)
         );
     }
 }
-
-
-function findProductById(searchArray, id) {
-    try {
-      const targetItem = searchArray.find((item) => item.food.foodId === id);
-      console.log(targetItem);
-      return targetItem;
-    } catch (error) {
-      console.log(error.message);
-    }
-    
-  }

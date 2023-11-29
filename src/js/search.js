@@ -24,6 +24,10 @@ document
 
     console.log(data);
     renderSearchResults();
+
+     // try if we can get the food id when user clicks the image or h2
+     const selector = document.querySelector(".see-detail");
+     saveId(selector);
   });
 
 function renderSearchResults() {
@@ -47,13 +51,11 @@ function searchResultTemplate(item) {
   }
 
   const newItem = `<li class="result-card divider">
-        <a href="../product/index.html" class="result-card__image">
+        <a href="../product/index.html" class="result-card__image see-detail" id="${item.food.foodId}" data-id="${item.food.foodId}">
             <img
                 src="${image}"
                 alt="${brand}${item.food.label}"
             />
-        </a>
-        <a href="../product/index.html">
             <h2 class="result-card__name">${brand} ${item.food.label}</h2>
         </a>
         <p class="result-card__calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
@@ -61,3 +63,11 @@ function searchResultTemplate(item) {
 
   return newItem;
 }
+
+function saveId(selector) {
+  const id = selector.getAttribute("data-id");
+  selector.addEventListener("click", () => {
+    setLocalStorage("food-id", id);
+  });
+}
+
