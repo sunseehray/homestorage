@@ -47,14 +47,14 @@ function searchResultTemplate(item) {
   }
 
   const newItem = `<li class="result-card divider">
-        <a href="" class="result-card__image">
+        <a href="../product/index.html" class="result-card__image">
             <img
                 src="${image}"
                 alt="${brand}${item.food.label}"
             />
         </a>
-        <a href="#">
-            <h2 class="card__name">${brand} ${item.food.label}</h2>
+        <a href="../product/index.html">
+            <h2 class="result-card__name">${brand} ${item.food.label}</h2>
         </a>
         <p class="result-card__calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
         </li>`;
