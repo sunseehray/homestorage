@@ -1,5 +1,5 @@
 import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
-import SearchResult from "./SearchResult.mjs";
+import ItemInfo from "./ItemInfo.mjs";
 
 const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
@@ -18,5 +18,5 @@ const foundItem = searchResults.find((item) => (item.food.foodId = foodId));
 console.log(foundItem);
 
 // use this food data to generate the content of this page
-const renderedItem = new SearchResult(foundItem);
+const renderedItem = new ItemInfo(foundItem);
 renderedItem.init();
