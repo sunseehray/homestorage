@@ -1,14 +1,25 @@
 //this helps generate search results
-import ExternalServices from "./ExternalServices.mjs";
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function searchResultDetailTemplate(item) {
+    let brand;
+    let image;
+    if (!item.food.brand) {
+        brand = "Generic";
+    } else {
+        brand = item.food.brand;
+    }
+    if (!item.food.image) {
+        image = "../images/filled-basket.jpg";
+    } else {
+        image = item.food.image;
+    }
     return `<section class="item-detail">
-        <h3>${item.food.brand}</h3>
+        <h3>${brand}</h3>
         <h2 class="divider">${item.food.label}</h2>
         <img
             class="divider"
-            src="${item.food.image}"
+            src="${image}"
             alt="${item.food.label}"
         />
         <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
@@ -19,19 +30,23 @@ function searchResultDetailTemplate(item) {
 }
 
 export default class SearchResult {
-    constructor(foodId) {
-        this.foodId = foodId;
-        this.food = {};
-        this.dataSource = getLocalStorage("search-results");
+    constructor(foodItem) {
+        this.foodId = foodItem.food.foodId;
+        this.food = foodItem;
     }
 
     async init() {
         // removed await since dataSource will be from localstorage "search-results"
-        this.food = findProductById(this.dataSource, this.foodId);
+        // this.food = findProductById(this.dataSource, this.foodId);
         this.renderSearchResultDetail("main");
+
         document
             .getElementById("addToInventory")
             .addEventListener("click", this.addToInventory.bind(this));
+
+        document
+            .getElementById("addToGroceryList")
+            .addEventListener("click", this.addToGroceryList.bind(this));
     }
 
     addToInventory() {
@@ -53,6 +68,7 @@ export default class SearchResult {
         const groceryList = getLocalStorage("grocery-list") || [];
         const searchId = this.foodId;
         const foundItem = groceryList.find((item) => item.food.foodId === searchId);
+        // MODIFY THIS PART TO INCLUDE QUANTITY AS WELL or do it in the grocery list instead
         if (!foundItem) {
             groceryList.push(this.food);
             setLocalStorage("grocery-list", groceryList);
@@ -63,19 +79,7 @@ export default class SearchResult {
         const element = document.querySelector(selector);
         element.insertAdjacentHTML(
             "afterBegin",
-            searchResultDetailTemplate(this.product)
+            searchResultDetailTemplate(this.food)
         );
     }
 }
-
-
-function findProductById(searchArray, id) {
-    try {
-      const targetItem = searchArray.find((item) => item.food.foodId === id);
-      console.log(targetItem);
-      return targetItem;
-    } catch (error) {
-      console.log(error.message);
-    }
-    
-  }
