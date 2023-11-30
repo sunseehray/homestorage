@@ -20,10 +20,9 @@ document
     const data = await dataSource.getSearchProducts();
     //save this data to local storage
     setLocalStorage("search-results", data);
-    // const listing = new ProductListing;
-    // const element = document.querySelector(".product-list");
-    // listing.init(element, "afterBegin");
+
     console.log(data);
+
     const element = document.querySelector(".product-list");
     renderSearchResults(data, element);
 
@@ -38,15 +37,3 @@ function renderSearchResults(data, parentElement) {
     item.init();
   });
 }
-// function renderSearchResults() {
-//   const searchResults = getLocalStorage("search-results") || [];
-//   const htmlItems = searchResults.map((item) => searchResultTemplate(item));
-//   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-// }
-
-// function saveId(selector) {
-//   const id = selector.getAttribute("data-id");
-//   selector.addEventListener("click", () => {
-//     setLocalStorage("food-id", id);
-//   });
-// }
