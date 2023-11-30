@@ -1,6 +1,6 @@
 // this is the script for the search page
-import { loadHeaderFooter, renderWithTemplate } from "./utils.mjs";
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+import { setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import SearchItem from "./SearchItem.mjs";
 
@@ -24,7 +24,7 @@ document
     // const element = document.querySelector(".product-list");
     // listing.init(element, "afterBegin");
     console.log(data);
-    const element = document.querySelector(".product-list")
+    const element = document.querySelector(".product-list");
     renderSearchResults(data, element);
 
     // try if we can get the food id when user clicks the image or h2
@@ -44,37 +44,9 @@ function renderSearchResults(data, parentElement) {
 //   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 // }
 
-function searchResultTemplate(item) {
-  let image;
-  if (!item.food.image) {
-    image = "../images/filled-basket.jpg";
-  } else {
-    image = item.food.image;
-  }
-  let brand;
-  if (!item.food.brand) {
-    brand = "Generic";
-  } else {
-    brand = item.food.brand;
-  }
-
-  const newItem = `<li class="result-card divider">
-        <a href="../product/index.html" class="result-card__image see-detail" id="${item.food.foodId}" data-id="${item.food.foodId}">
-            <img
-                src="${image}"
-                alt="${brand}${item.food.label}"
-            />
-            <h2 class="result-card__name">${brand} ${item.food.label}</h2>
-        </a>
-        <p class="result-card__calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
-        </li>`;
-
-  return newItem;
-}
-
-function saveId(selector) {
-  const id = selector.getAttribute("data-id");
-  selector.addEventListener("click", () => {
-    setLocalStorage("food-id", id);
-  });
-}
+// function saveId(selector) {
+//   const id = selector.getAttribute("data-id");
+//   selector.addEventListener("click", () => {
+//     setLocalStorage("food-id", id);
+//   });
+// }
