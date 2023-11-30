@@ -1,4 +1,4 @@
-import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
+import { renderWithTemplate } from "./utils.mjs";
 
 function searchResultTemplate(item) {
     let image;
@@ -29,16 +29,17 @@ function searchResultTemplate(item) {
   }
 
 
-export default class ProductListing {
-  constructor(listElement, position) {
-      this.listElement = listElement;
-      this.position = position;
+export default class SearchItem {
+  constructor(foodId, dataSource, listElement) {
+      this.foodId = foodId;
+      this.food = {};
+      this.dataSource = dataSource;
+      this.listElement = listElement
   }
 
   async init() {
-    // Get the list of results
-    const list = getLocalStorage("search-results");
-    // render the list
-    renderListWithTemplate(searchResultTemplate, this.listElement, list);
+    // Get the specific food from the dataSource
+    this.food = this.dataSource.find((item) => item.food.foodId === this.foodId);
+    renderWithTemplate(searchResultTemplate(this.food), this.listElement, this.food, "beforeend");
   }
 }
