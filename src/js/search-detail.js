@@ -1,5 +1,5 @@
 import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
-import SearchResult from "./SearchResult.mjs";
+import ItemInfo from "./ItemInfo.mjs";
 
 const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
@@ -10,13 +10,22 @@ const foodId = getLocalStorage("food-id");
 console.log(foodId);
 
 //get the data source which is the results of the search that the user generated
-const data = getLocalStorage("search-results");
-console.log(data);
+const searchResults = getLocalStorage("search-results");
+console.log(searchResults);
 
 //extract the food from the data using the id
-const foundItem = data.find((item) => (item.food.foodId = foodId));
+const foundItem = searchResults.find((item) => (item.food.foodId = foodId));
 console.log(foundItem);
 
+// extract the food from the data using the index
+const itemIndex = getLocalStorage("food-index");
+const itemFromIndex = searchResults[itemIndex];
+console.log(itemFromIndex);
+
 // use this food data to generate the content of this page
-const renderedItem = new SearchResult(foundItem);
+// const renderedItem = new ItemInfo(foundItem);
+// renderedItem.init();
+
+// use the itemFromIndex to generate the specific food item
+const renderedItem = new ItemInfo(itemFromIndex);
 renderedItem.init();

@@ -1,7 +1,7 @@
 //this helps generate search results
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-function searchResultDetailTemplate(item) {
+function itemInfoTemplate(item) {
     let brand;
     let image;
     if (!item.food.brand) {
@@ -29,7 +29,7 @@ function searchResultDetailTemplate(item) {
         </section>`;
 }
 
-export default class SearchResult {
+export default class ItemInfo {
     constructor(foodItem) {
         this.foodId = foodItem.food.foodId;
         this.food = foodItem;
@@ -79,7 +79,7 @@ export default class SearchResult {
         const element = document.querySelector(selector);
         element.insertAdjacentHTML(
             "afterBegin",
-            searchResultDetailTemplate(this.food)
+            itemInfoTemplate(this.food)
         );
     }
 }
