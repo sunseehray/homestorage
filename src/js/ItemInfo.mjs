@@ -1,9 +1,10 @@
 //this helps generate search results
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, changeCart } from "./utils.mjs";
 
 function itemInfoTemplate(item) {
     let brand;
     let image;
+    let serving;
     if (!item.food.brand) {
         brand = "Generic";
     } else {
@@ -14,15 +15,22 @@ function itemInfoTemplate(item) {
     } else {
         image = item.food.image;
     }
+    if (!item.food.servingSizes) {
+        serving = "";
+    } else {
+        serving = `<p>Serving: ${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</p>`;
+    }
+
     return `<section class="item-detail">
         <h3>${brand}</h3>
-        <h2 class="divider">${item.food.label}</h2>
+        <h2 class="divider">${item.food.knownAs}</h2>
         <img
             class="divider"
             src="${image}"
             alt="${item.food.label}"
         />
         <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
+        ${serving}
         <div class="item-detail__add">
             <button id="addToInventory" data-id="${item.food.foodId}">Add to Inventory</button>
             <button id="addToGroceryList" data-id="${item.food.foodId}">Add to Grocery List</button>
@@ -47,6 +55,7 @@ export default class ItemInfo {
         document
             .getElementById("addToGroceryList")
             .addEventListener("click", this.addToGroceryList.bind(this));
+
     }
 
     addToInventory() {
@@ -72,6 +81,7 @@ export default class ItemInfo {
         if (!foundItem) {
             groceryList.push(this.food);
             setLocalStorage("grocery-list", groceryList);
+            changeCart();
         }
     }
 

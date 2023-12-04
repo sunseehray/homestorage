@@ -20,7 +20,7 @@ function searchResultTemplate(item) {
                   src="${image}"
                   alt="${brand}${item.food.label}"
               />
-              <h2 class="result-card__name">${brand} ${item.food.label}</h2>
+              <h2 class="result-card__name">${brand} ${item.food.knownAs}</h2>
           </a>
           <p class="result-card__calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
           </li>`;
