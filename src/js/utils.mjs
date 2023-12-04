@@ -66,4 +66,16 @@ export async function loadHeaderFooter(headerPath, footerPath) {
   // render the header and footer
   renderWithTemplate(headerTemplate, headerId);
   renderWithTemplate(footerTemplate, footerId);
+  changeCart();
+}
+
+export function changeCart() {
+  const cartIcon = document.querySelector(".cart-icon");
+  const gList = getLocalStorage("grocery-list");
+
+  if (gList.length > 0) {
+      cartIcon.setAttribute("src", "../images/filled-basket.jpg");
+  } else {
+    cartIcon.setAttribute("src", "../images/empty-basket.jpg")
+  }
 }
