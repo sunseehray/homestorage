@@ -10,7 +10,6 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         inventory: resolve(__dirname, "src/inventory/index.html"),
-        checkout: resolve(__dirname, "src/checkout/index.html"),
         search: resolve(__dirname, "src/search/index.html"),
         product: resolve(__dirname, "src/product/index.html"),
         grocery: resolve(__dirname, "src/grocery/index.html"),
