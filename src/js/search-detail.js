@@ -17,6 +17,15 @@ console.log(searchResults);
 const foundItem = searchResults.find((item) => (item.food.foodId = foodId));
 console.log(foundItem);
 
+// extract the food from the data using the index
+const itemIndex = getLocalStorage("food-index");
+const itemFromIndex = searchResults[itemIndex];
+console.log(itemFromIndex);
+
 // use this food data to generate the content of this page
-const renderedItem = new ItemInfo(foundItem);
+// const renderedItem = new ItemInfo(foundItem);
+// renderedItem.init();
+
+// use the itemFromIndex to generate the specific food item
+const renderedItem = new ItemInfo(itemFromIndex);
 renderedItem.init();

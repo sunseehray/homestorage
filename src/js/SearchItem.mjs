@@ -1,4 +1,4 @@
-import { renderWithTemplate, setLocalStorage } from "./utils.mjs";
+import { renderWithTemplate, setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 function searchResultTemplate(item) {
     let image;
@@ -35,6 +35,15 @@ function searchResultTemplate(item) {
     });
   }
 
+  function saveIndex(selector) {
+    const id = selector.getAttribute("data-id");
+    const searchResults = getLocalStorage("search-results");
+    selector.addEventListener("click", () => {
+      const foundItemIndex = searchResults.findIndex((item) => item.food.foodId === id);
+      setLocalStorage("food-index", foundItemIndex);
+    });
+  }
+
 export default class SearchItem {
   constructor(foodId, dataSource, listElement) {
       this.foodId = foodId;
@@ -49,6 +58,7 @@ export default class SearchItem {
     renderWithTemplate(searchResultTemplate(this.food), this.listElement, this.food, "beforeend");
     const selector = document.querySelector(`#${this.foodId}`);
     saveId(selector);
+    saveIndex(selector);
   }
 }
 

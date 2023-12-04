@@ -1,6 +1,6 @@
 // this is the script for the search page
 import { loadHeaderFooter } from "./utils.mjs";
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import SearchItem from "./SearchItem.mjs";
 
@@ -32,6 +32,8 @@ document
   });
 
 function renderSearchResults(data, parentElement) {
+  // clear first, otherwise, it will pile up as user searches again and again
+  parentElement.innerHTML = "";
   data.forEach((p) => {
     const item = new SearchItem(p.food.foodId, data, parentElement);
     item.init();
