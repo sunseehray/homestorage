@@ -1,6 +1,6 @@
 // this is the script for the search page
 import { loadHeaderFooter } from "./utils.mjs";
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import SearchItem from "./SearchItem.mjs";
 
