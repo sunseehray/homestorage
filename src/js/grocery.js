@@ -35,6 +35,12 @@ function renderGroceryList() {
   const element = document.querySelector(".grocery-list");
   const htmlItems = groceryListItems.map((item) => groceryListTemplate(item));
   element.innerHTML = htmlItems.join("");
+
+  // allow users to print grocery list
+  //  const printGroceryList = document.querySelector("#print-glist");
+  //  printGroceryList.addEventListener("click", () => {
+  //    alert("Hello");
+  //  });
 }
 
 renderGroceryList();

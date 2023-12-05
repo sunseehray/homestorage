@@ -19,9 +19,20 @@ function renderInventory() {
       removeFromInventory(button.dataset.id)
     );
   });
+  // allow users to add to grocery list
   const addToGroceryButtons = document.querySelectorAll(".addToGrocery");
   addToGroceryButtons.forEach((button) => {
     button.addEventListener("click", () => addToGrocery(button.dataset.id));
+  });
+  // allow users to increase inventory
+  const increaseInventoryBtn = document.querySelectorAll(".increaseInventory");
+  increaseInventoryBtn.forEach((button) => {
+    button.addEventListener("click", () => increaseStock(button.dataset.id));
+  });
+  // allow users to decrease inventory
+  const decreaseInventoryBtn = document.querySelectorAll(".decreaseInventory");
+  decreaseInventoryBtn.forEach((button) => {
+    button.addEventListener("click", () => decreaseStock(button.dataset.id));
   });
 }
 
@@ -47,20 +58,20 @@ function inventoryTemplate(item) {
     alt="${item.food.label}"
   />
   <h2 class="card__name">${item.food.knownAs}</h2>
-  <p class="inventory-card__quantity"><span class="addToGrocery" data-id="${
+  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${
     item.food.foodId
-  }">📃</span><span class="removeFromInventory" data-id="${
+  }">📃</span><span class="removeFromInventory btneffect" data-id="${
     item.food.foodId
   }">❌</span></p>
   <p class="inventory-card__calories">${
     item.food.nutrients.ENERC_KCAL
   } Calories</p>
   <p class="inventory-card__price">$${price.toFixed(2)}</p>
-  <p class="inventory-card__quantity"><span class="increaseInventory" data-id="${
+  <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${
     item.food.foodId
   }">➖</span> ${
     item.InventoryQuantity
-  } <span class="decreaseInventory" data-id="${
+  } <span class="increaseInventory btneffect" data-id="${
     item.food.foodId
   }">➕</span> in stock</p>
 </li>`;
@@ -100,6 +111,31 @@ function removeFromInventory(key) {
   );
   setLocalStorage("inventory", updatedInventoryItems);
 
+  renderInventory();
+}
+
+function increaseStock(key) {
+  const inventoryItems = getLocalStorage("inventory");
+  const foundItemIndex = inventoryItems.findIndex(
+    (item) => item.food.foodId === key
+  );
+  inventoryItems[foundItemIndex].InventoryQuantity += 1;
+  setLocalStorage("inventory", inventoryItems);
+  renderInventory();
+}
+
+function decreaseStock(key) {
+  const inventoryItems = getLocalStorage("inventory");
+  const foundItemIndex = inventoryItems.findIndex(
+    (item) => item.food.foodId === key
+  );
+  const quantity = inventoryItems[foundItemIndex].InventoryQuantity;
+  if (quantity > 0) {
+    inventoryItems[foundItemIndex].InventoryQuantity -= 1;
+  } else {
+    inventoryItems[foundItemIndex].InventoryQuantity = 0;
+  }
+  setLocalStorage("inventory", inventoryItems);
   renderInventory();
 }
 
