@@ -77,11 +77,17 @@ export default class ItemInfo {
         const groceryList = getLocalStorage("grocery-list") || [];
         const searchId = this.foodId;
         const foundItem = groceryList.find((item) => item.food.foodId === searchId);
+        const foundItemIndex = groceryList.findIndex((item) => item.food.foodId === searchId);
+
         // MODIFY THIS PART TO INCLUDE QUANTITY AS WELL or do it in the grocery list instead
         if (!foundItem) {
+            this.food.GroceryQuantity = 1;
             groceryList.push(this.food);
             setLocalStorage("grocery-list", groceryList);
             changeCart();
+        } else {
+            groceryList[foundItemIndex].GroceryQuantity += 1;
+            setLocalStorage("grocery-list", groceryList);
         }
     }
 

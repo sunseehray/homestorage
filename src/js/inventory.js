@@ -28,7 +28,6 @@ function renderInventory() {
 function inventoryTemplate(item) {
   let image;
   let price;
-  let quantity;
 
   if (!item.food.image) {
     image = "../images/filled-basket.jpg";
@@ -40,12 +39,6 @@ function inventoryTemplate(item) {
     price = 0.0;
   } else {
     price = item.price;
-  }
-
-  if (!item.quantity) {
-    quantity = 0;
-  } else {
-    quantity = item.quantity;
   }
 
   const newItem = `<li class="inventory-card divider">
@@ -65,7 +58,7 @@ function inventoryTemplate(item) {
   <p class="inventory-card__price">$${price.toFixed(2)}</p>
   <p class="inventory-card__quantity"><span class="increaseInventory" data-id="${
     item.food.foodId
-  }">➖</span> ${quantity} <span class="decreaseInventory" data-id="${
+  }">➖</span> ${item.InventoryQuantity} <span class="decreaseInventory" data-id="${
     item.food.foodId
   }">➕</span> in stock</p>
 </li>`;
@@ -82,13 +75,13 @@ function addToGrocery(key) {
     (item) => item.food.foodId === key
   );
   if (foundItem) {
-    groceryItems[foundItemIndex].quantity += 1;
+    groceryItems[foundItemIndex].GroceryQuantity += 1;
     setLocalStorage("grocery-list", groceryItems);
   } else {
     // add a quantity property to the product
     const inventoryItems = getLocalStorage("inventory");
     const itemToAdd = inventoryItems.find((item) => item.food.foodId === key);
-    itemToAdd.quantity = 1;
+    itemToAdd.GroceryQuantity = 1;
     // add this product to the grocery items array
     groceryItems.push(itemToAdd);
     // update the local storage with this array including the new product
