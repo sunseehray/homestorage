@@ -14,10 +14,10 @@ clearInventoryBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const userConfirmation = window.confirm("Do you want to proceed?");
   if (userConfirmation) {
-    setLocalStorage("inventory",[]);
+    setLocalStorage("inventory", []);
     renderInventory();
   }
-})
+});
 
 function renderInventory() {
   const inventoryItems = getLocalStorage("inventory") || [];
@@ -62,21 +62,9 @@ function inventoryTemplate(item) {
     alt="${item.food.label}"
   />
   <h2 class="card__name">${item.food.knownAs}</h2>
-  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${
-    item.food.foodId
-  }">📃</span><span class="removeFromInventory btneffect" data-id="${
-    item.food.foodId
-  }">❌</span></p>
-  <p class="inventory-card__calories">${
-    item.food.nutrients.ENERC_KCAL
-  } Calories</p>
-  <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${
-    item.food.foodId
-  }">➖</span> ${
-    item.InventoryQuantity
-  } <span class="increaseInventory btneffect" data-id="${
-    item.food.foodId
-  }">➕</span> in stock</p>
+  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${item.food.foodId}">📃</span><span class="removeFromInventory btneffect" data-id="${item.food.foodId}">❌</span></p>
+  <p class="inventory-card__calories">${item.food.nutrients.ENERC_KCAL} Calories</p>
+  <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${item.food.foodId}">➖</span> ${item.InventoryQuantity} <span class="increaseInventory btneffect" data-id="${item.food.foodId}">➕</span> in stock</p>
 </li>`;
 
   return newItem;
