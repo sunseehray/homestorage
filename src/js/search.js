@@ -21,8 +21,6 @@ document
     //save this data to local storage
     setLocalStorage("search-results", data);
 
-    console.log(data);
-
     const element = document.querySelector(".product-list");
     renderSearchResults(data, element);
 

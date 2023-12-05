@@ -65,12 +65,10 @@ function estimateGroceryTotalPrice() {
     return accumulator + total;
   }, 0);
   document.querySelector(".est-total-price").innerHTML = totalPrice;
-  console.log(totalPrice);
 }
 
 // allow users to update price and calculate total
 const calculatePriceBtn = document.querySelector(".calculate-total-price");
-console.log(calculatePriceBtn);
 calculatePriceBtn.addEventListener("click", (e) => {
   e.preventDefault();
   estimateGroceryTotalPrice();
