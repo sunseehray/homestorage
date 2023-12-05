@@ -111,7 +111,6 @@ button {
   padding: 12px;
 }
 
-
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
@@ -148,7 +147,7 @@ button {
 .products {
   padding: 0.5em;
 }
-.product-list {
+.product-list, .inventory-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -197,7 +196,7 @@ button {
   background-color: white;
 }
 
-.product-card {
+.product-card, .inventory-card {
   flex: 1 1 45%;
   margin: 0.25em;
   padding: 0.5em;
@@ -227,6 +226,18 @@ button {
 
 .product-detail img {
   width: 100%;
+}
+
+/* inventory page */
+.inventory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inventory-list {
+  flex-direction: column;
+  max-width: 90%;
 }
 
 /* Start cart list card styles */
