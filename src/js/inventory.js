@@ -58,7 +58,9 @@ function inventoryTemplate(item) {
   <p class="inventory-card__price">$${price.toFixed(2)}</p>
   <p class="inventory-card__quantity"><span class="increaseInventory" data-id="${
     item.food.foodId
-  }">➖</span> ${item.InventoryQuantity} <span class="decreaseInventory" data-id="${
+  }">➖</span> ${
+    item.InventoryQuantity
+  } <span class="decreaseInventory" data-id="${
     item.food.foodId
   }">➕</span> in stock</p>
 </li>`;
