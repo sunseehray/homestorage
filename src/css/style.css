@@ -237,8 +237,8 @@ button {
 
 .inventory-list {
   flex-direction: column;
-  max-width: 90%;
 }
+
 
 /* Start cart list card styles */
 .cart-card {
