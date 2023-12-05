@@ -13,6 +13,7 @@ export default defineConfig({
         search: resolve(__dirname, "src/search/index.html"),
         product: resolve(__dirname, "src/product/index.html"),
         grocery: resolve(__dirname, "src/grocery/index.html"),
+        admin: resolve(__dirname, "src/admin/index.html"),
       },
     },
   },
