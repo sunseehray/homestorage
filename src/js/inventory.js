@@ -8,6 +8,17 @@ const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
 loadHeaderFooter(headerPath, footerPath);
 
+// clear inventory
+const clearInventoryBtn = document.querySelector(".clear-inventory");
+clearInventoryBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const userConfirmation = window.confirm("Do you want to proceed?");
+  if (userConfirmation) {
+    setLocalStorage("inventory", []);
+    renderInventory();
+  }
+});
+
 function renderInventory() {
   const inventoryItems = getLocalStorage("inventory") || [];
   const htmlItems = inventoryItems.map((item) => inventoryTemplate(item));
@@ -38,18 +49,11 @@ function renderInventory() {
 
 function inventoryTemplate(item) {
   let image;
-  let price;
 
   if (!item.food.image) {
     image = "../images/filled-basket.jpg";
   } else {
     image = item.food.image;
-  }
-
-  if (!item.price) {
-    price = 0.0;
-  } else {
-    price = item.price;
   }
 
   const newItem = `<li class="inventory-card divider">
@@ -58,22 +62,9 @@ function inventoryTemplate(item) {
     alt="${item.food.label}"
   />
   <h2 class="card__name">${item.food.knownAs}</h2>
-  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${
-    item.food.foodId
-  }">📃</span><span class="removeFromInventory btneffect" data-id="${
-    item.food.foodId
-  }">❌</span></p>
-  <p class="inventory-card__calories">${
-    item.food.nutrients.ENERC_KCAL
-  } Calories</p>
-  <p class="inventory-card__price">$${price.toFixed(2)}</p>
-  <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${
-    item.food.foodId
-  }">➖</span> ${
-    item.InventoryQuantity
-  } <span class="increaseInventory btneffect" data-id="${
-    item.food.foodId
-  }">➕</span> in stock</p>
+  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${item.food.foodId}">📃</span><span class="removeFromInventory btneffect" data-id="${item.food.foodId}">❌</span></p>
+  <p class="inventory-card__calories">${item.food.nutrients.ENERC_KCAL} Calories</p>
+  <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${item.food.foodId}">➖</span> ${item.InventoryQuantity} <span class="increaseInventory btneffect" data-id="${item.food.foodId}">➕</span> in stock</p>
 </li>`;
 
   return newItem;
