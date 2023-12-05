@@ -6,7 +6,7 @@ function itemInfoTemplate(item) {
     let image;
     let serving;
     if (!item.food.brand) {
-        brand = "Generic";
+        brand = "";
     } else {
         brand = item.food.brand;
     }
@@ -22,8 +22,8 @@ function itemInfoTemplate(item) {
     }
 
     return `<section class="item-detail">
-        <h3>${brand}</h3>
-        <h2 class="divider">${item.food.knownAs}</h2>
+        <h3 class="divider">Item Details</h3>
+        <h3>${item.food.knownAs}</h3>
         <img
             class="divider"
             src="${image}"
