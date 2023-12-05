@@ -1,4 +1,4 @@
-import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
@@ -22,11 +22,10 @@ function groceryListTemplate(item) {
 
   return `<li class="divider">
         <img src="${image}" 
-            alt = "${item.food.label}"
+         alt = "${item.food.label}"
         />
-        <h3>${item.food.knownAs}<h3>
-        <p>${brand}</p>
-        <p>${item.GroceryQuantity}x</p>
+        <h3>${brand} ${item.food.knownAs}<h3>
+        <span>$<input class="input-price" type="number" placeholder="Enter price" data-id="${item.food.foodId}"/></span><p>${item.GroceryQuantity}x</p>
     </li>`;
 }
 
@@ -41,6 +40,30 @@ function renderGroceryList() {
   //  printGroceryList.addEventListener("click", () => {
   //    alert("Hello");
   //  });
+
+    // allow users to update price and calculate total
+    const calculatePriceBtn = document.querySelector(".calculate-total-price");
+    console.log(calculatePriceBtn);
+    calculatePriceBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      estimateGroceryTotalPrice();
+    });
+  
+}
+
+function estimateGroceryTotalPrice() {
+  const groceryListItems = getLocalStorage("grocery-list");
+  const pricesInput = document.querySelectorAll(".input-price");
+  pricesInput.forEach((input) => {
+      const itemIndex = groceryListItems.findIndex((item) => item.food.foodId === input.dataset.id);
+      if (itemIndex) {
+        groceryListItems[itemIndex].price = input.value;
+        setLocalStorage("grocery-list", groceryListItems);
+      }
+    });
+  const updatedGroceryListItems = getLocalStorage("grocery-list");
+  const totalPrice = updatedGroceryListItems.reduce((item) => item.GroceryQuantity * item.price);
+  document.querySelector(".est-total-price").innerHTML = totalPrice;
 }
 
 renderGroceryList();
