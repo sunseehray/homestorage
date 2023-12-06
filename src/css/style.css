@@ -147,7 +147,9 @@ button {
 .products {
   padding: 0.5em;
 }
-.product-list, .inventory-list, .grocery-list {
+.product-list,
+.inventory-list,
+.grocery-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -197,7 +199,11 @@ button {
   background-color: white;
 }
 
-.product-card, .result-card, .inventory-card, .grocery-card, .item-detail {
+.product-card,
+.result-card,
+.inventory-card,
+.grocery-card,
+.item-detail {
   flex: 1 1 45%;
   margin: 0.25em;
   padding: 0.5em;
@@ -206,7 +212,9 @@ button {
 }
 .product-card h2,
 .product-card h3,
-.product-card p, .item-detail h3, .item-detail p {
+.product-card p,
+.item-detail h3,
+.item-detail p {
   margin: 0.5em 0;
 }
 
@@ -232,7 +240,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: .25em auto;
+  margin: 0.25em auto;
 }
 
 /* inventory page */
