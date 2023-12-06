@@ -31,7 +31,7 @@ function groceryListTemplate(item) {
     price = item.price;
   }
 
-  return `<li class="divider">
+  return `<li class="grocery-card divider">
         <img src="${image}" 
          alt = "${item.food.label}"
         />
