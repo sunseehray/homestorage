@@ -64,7 +64,8 @@ header {
   color: var(--secondary-color);
 }
 
-h3 {
+h3,
+h2 {
   text-align: center;
 }
 
@@ -244,7 +245,8 @@ button {
 }
 
 /* inventory page */
-.inventory {
+.inventory,
+.grocery {
   display: flex;
   flex-direction: column;
   align-items: center;
