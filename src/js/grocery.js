@@ -19,6 +19,45 @@ clearGroceryBtn.addEventListener("click", (e) => {
   }
 });
 
+// checkout grocery
+const checkoutGroceryBtn = document.querySelector(".checkout-grocery");
+checkoutGroceryBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const userConfirmation = window.confirm(
+    "Checkout grocery items and add to inventory?"
+  );
+  // get grocery items and inventory items
+  const groceryItems = getLocalStorage("grocery-list") || [];
+  const inventoryItems = getLocalStorage("inventory");
+  // if user says yes AND the grocery list is not empty
+  if (userConfirmation && groceryItems != []) {
+    //plug in the grocery items into the inventory
+    groceryItems.forEach((groceryItem) => {
+      const itemMatch = inventoryItems.find(
+        (inventory) => inventory.food.foodId === groceryItem.food.foodId
+      );
+      const itemMatchIndex = inventoryItems.findIndex(
+        (inventory) => inventory.food.foodId === groceryItem.food.foodId
+      );
+      //if the item is found, update the inventory quantity by adding the grocery quantity
+      if (itemMatch) {
+        inventoryItems[itemMatchIndex].InventoryQuantity +=
+          groceryItem.GroceryQuantity;
+        setLocalStorage("inventory", inventoryItems);
+      } else {
+        //if item is not found, groceryItem is added to the inventory with its inventory quantity as the grocery quantity
+        groceryItem.InventoryQuantity = groceryItem.GroceryQuantity;
+        inventoryItems.push(groceryItem);
+        setLocalStorage("inventory", inventoryItems);
+      }
+    });
+
+    // empty grocery list
+    setLocalStorage("grocery-list", []);
+    renderGroceryList();
+  }
+});
+
 function groceryListTemplate(item) {
   let brand;
   let image;
@@ -52,7 +91,7 @@ function groceryListTemplate(item) {
 }
 
 function renderGroceryList() {
-  const groceryListItems = getLocalStorage("grocery-list");
+  const groceryListItems = getLocalStorage("grocery-list") || [];
   const element = document.querySelector(".grocery-list");
   const htmlItems = groceryListItems.map((item) => groceryListTemplate(item));
   element.innerHTML = htmlItems.join("");

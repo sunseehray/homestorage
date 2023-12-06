@@ -71,7 +71,7 @@ export async function loadHeaderFooter(headerPath, footerPath) {
 
 export function changeCart() {
   const cartIcon = document.querySelector(".cart-icon");
-  const gList = getLocalStorage("grocery-list");
+  const gList = getLocalStorage("grocery-list") || [];
 
   if (gList.length > 0) {
       cartIcon.setAttribute("src", "../images/filled-basket.jpg");
