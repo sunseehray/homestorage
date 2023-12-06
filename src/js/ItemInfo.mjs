@@ -54,6 +54,14 @@ export default class ItemInfo {
             .getElementById("addToGroceryList")
             .addEventListener("click", this.addToGroceryList.bind(this));
 
+        document
+            .getElementById("addToInventory")
+            .addEventListener("click", this.wiggleInventory.bind(this));
+
+        document
+            .getElementById("addToGroceryList")
+            .addEventListener("click", this.wiggleBasket.bind(this));
+
     }
 
     addToInventory() {
@@ -94,5 +102,24 @@ export default class ItemInfo {
             "afterBegin",
             itemInfoTemplate(this.food)
         );
+    }
+
+    wiggleInventory() {
+        const element = document.querySelector(".inventory-icon");
+        this.wiggle(element);
+    }
+
+    wiggleBasket() {        
+        const element = document.querySelector(".cart-icon");
+        this.wiggle(element);
+    }
+
+    wiggle(element) {
+        // Remove animation to reset it
+        element.style.animation = "none";
+        // Trigger a reflow to ensure the animation restarts
+        void element.offsetWidth;
+        element.style.animation = "wiggleAnimation 1s 1";
+
     }
 }

@@ -297,6 +297,30 @@ button {
   cursor: pointer;
 }
 
+/* wiggle effect */
+@keyframes wiggleAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.inventory-icon,
+.cart-icon {
+  transition: transform 0.2s;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
