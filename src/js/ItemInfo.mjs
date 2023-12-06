@@ -6,7 +6,7 @@ function itemInfoTemplate(item) {
     let image;
     let serving;
     if (!item.food.brand) {
-        brand = "Generic";
+        brand = "";
     } else {
         brand = item.food.brand;
     }
@@ -18,18 +18,16 @@ function itemInfoTemplate(item) {
     if (!item.food.servingSizes) {
         serving = "";
     } else {
-        serving = `<p>Serving: ${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</p>`;
+        serving = `<p>Serving Size: ${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</p>`;
     }
 
     return `<section class="item-detail">
-        <h3>${brand}</h3>
-        <h2 class="divider">${item.food.knownAs}</h2>
         <img
-            class="divider"
             src="${image}"
             alt="${item.food.label}"
         />
-        <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL}</p>
+        <h3>${item.food.knownAs}</h3>
+        <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL.toFixed(0)}</p>
         ${serving}
         <div class="item-detail__add">
             <button id="addToInventory" data-id="${item.food.foodId}">Add to Inventory</button>
@@ -46,7 +44,7 @@ export default class ItemInfo {
     async init() {
         // removed await since dataSource will be from localstorage "search-results"
         // this.food = findProductById(this.dataSource, this.foodId);
-        this.renderSearchResultDetail("main");
+        this.renderSearchResultDetail(".product-detail");
 
         document
             .getElementById("addToInventory")

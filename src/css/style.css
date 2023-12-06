@@ -107,6 +107,8 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  margin: 12px;
+  padding: 12px;
 }
 
 .divider {
@@ -145,10 +147,10 @@ button {
 .products {
   padding: 0.5em;
 }
-.product-list {
+.product-list, .inventory-list, .grocery-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
   list-style-type: none;
   padding: 0;
 }
@@ -156,20 +158,38 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
+
+.item-detail__add {
+  display: flex;
+  flex-direction: column;
+}
 /* Styles for product lists */
+.page-title {
+  text-align: center;
+}
+.search-page {
+  text-align: center;
+}
 
 #search-form {
   display: flex;
   flex-direction: row;
   column-gap: 0.2em;
-  margin: auto 5%;
+  margin: 0 5%;
 }
 #search-form input {
-  border-radius: 12px;
+  border-radius: 28px;
   padding-left: 1em;
   width: 90%;
   border: 2px solid rgba(192, 192, 192, 0.5);
   font-family: "Poppins", Arial, sans-serif;
+  font-size: 1em;
+}
+#search-button {
+  margin: 0;
+  padding: 0.2em;
+  border: none;
+  border-radius: 50%;
 }
 
 #search {
@@ -177,7 +197,7 @@ button {
   background-color: white;
 }
 
-.product-card {
+.product-card, .result-card, .inventory-card, .grocery-card, .item-detail {
   flex: 1 1 45%;
   margin: 0.25em;
   padding: 0.5em;
@@ -186,7 +206,7 @@ button {
 }
 .product-card h2,
 .product-card h3,
-.product-card p {
+.product-card p, .item-detail h3, .item-detail p {
   margin: 0.5em 0;
 }
 
@@ -200,13 +220,33 @@ button {
 /* End product list card */
 
 .product-detail {
-  padding: 1em;
   max-width: 500px;
   margin: auto;
 }
 
 .product-detail img {
   width: 100%;
+}
+
+.item-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: .25em auto;
+}
+
+/* inventory page */
+.inventory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* grocery page */
+.grocery-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Start cart list card styles */

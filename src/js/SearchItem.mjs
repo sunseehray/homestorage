@@ -9,7 +9,7 @@ function searchResultTemplate(item) {
     }
     let brand;
     if (!item.food.brand) {
-      brand = "Generic";
+      brand = "";
     } else {
       brand = item.food.brand;
     }
