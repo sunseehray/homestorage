@@ -8,13 +8,24 @@ const headerPath = "../partials/header.html";
 const footerPath = "../partials/footer.html";
 loadHeaderFooter(headerPath, footerPath);
 
+// clear grocery
+const clearGroceryBtn = document.querySelector(".clear-grocery");
+clearGroceryBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const userConfirmation = window.confirm("Do you want to proceed?");
+  if (userConfirmation) {
+    setLocalStorage("grocery-list", []);
+    renderGroceryList();
+  }
+});
+
 function groceryListTemplate(item) {
   let brand;
   let image;
   let price;
 
   if (!item.food.brand) {
-    brand = "generic";
+    brand = "";
   } else {
     brand = item.food.brand;
   }
