@@ -2,6 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   loadHeaderFooter,
+  wiggle,
 } from "./utils.mjs";
 
 const headerPath = "../partials/header.html";
@@ -33,7 +34,11 @@ function renderInventory() {
   // allow users to add to grocery list
   const addToGroceryButtons = document.querySelectorAll(".addToGrocery");
   addToGroceryButtons.forEach((button) => {
-    button.addEventListener("click", () => addToGrocery(button.dataset.id));
+    button.addEventListener("click", () => {
+      addToGrocery(button.dataset.id);
+      const groceryIcon = document.querySelector(".cart-icon");
+      wiggle(groceryIcon);
+    });
   });
   // allow users to increase inventory
   const increaseInventoryBtn = document.querySelectorAll(".increaseInventory");
@@ -56,7 +61,7 @@ function inventoryTemplate(item) {
   } else {
     image = item.food.image;
   }
-  
+
   if (!item.food.servingSizes) {
     serving = "";
   } else {
@@ -78,8 +83,8 @@ function inventoryTemplate(item) {
       <p class="inventory-card__quantity"><button class="addToGrocery btneffect" data-id="${
         item.food.foodId
       }">📃</button><button class="removeFromInventory btneffect" data-id="${
-        item.food.foodId
-      }">❌</button></p>
+    item.food.foodId
+  }">❌</button></p>
     </div>
   </div>
   <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${
