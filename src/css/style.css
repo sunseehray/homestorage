@@ -298,7 +298,8 @@ button {
   justify-content: center;
 }
 
-.card__price, .card__quantity {
+.card__price,
+.card__quantity {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -314,14 +315,12 @@ button {
 }
 
 .card__price__amount {
-  margin: .5em;
+  margin: 0.5em;
 }
 
 .grocery__quantity__value {
   margin: 0 1em;
 }
-
-
 
 /* Start cart list card styles */
 .cart-card {

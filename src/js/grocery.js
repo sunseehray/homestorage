@@ -21,7 +21,7 @@ clearGroceryBtn.addEventListener("click", (e) => {
 // prevent default in form submission
 const groceryForm = document.querySelector(".grocery-form");
 groceryForm.addEventListener("submit", (e) => {
-  e.preventDefault(); 
+  e.preventDefault();
   estimateGroceryTotalPrice();
 });
 
@@ -93,20 +93,24 @@ function groceryListTemplate(item) {
       <img src="${image}" 
       alt = "${item.food.label}"
       />          
-      <button class="removeFromGrocery btneffect item-detail__add" data-id="${item.food.foodId}">❌</button>
+      <button class="removeFromGrocery btneffect item-detail__add" data-id="${
+        item.food.foodId
+      }">❌</button>
     </div>
 
       <div class="card__price">
-        <span class="card__price__amount">$<input class="input-price" type="number" placeholder="${price}" value="${price}" data-id="${item.food.foodId}"/></span>
+        <span class="card__price__amount">$<input class="input-price" type="number" placeholder="${price}" value="${price}" data-id="${
+    item.food.foodId
+  }"/></span>
       </div>
       <div class="card__quantity">
         <span class="decreaseGrocery btneffect" data-id="${
           item.food.foodId
         }">➖</span> <span class="grocery__quantity__value">${
-          item.GroceryQuantity
-        } </span><span class="increaseGrocery btneffect" data-id="${
-          item.food.foodId
-        }">➕</span>
+    item.GroceryQuantity
+  } </span><span class="increaseGrocery btneffect" data-id="${
+    item.food.foodId
+  }">➕</span>
       </div>
 
     </li>`;
@@ -117,6 +121,17 @@ function renderGroceryList() {
   const element = document.querySelector(".grocery-list");
   const htmlItems = groceryListItems.map((item) => groceryListTemplate(item));
   element.innerHTML = htmlItems.join("");
+
+  // decrease grocery item quantity
+  const decreaseQtyBtn = document.querySelectorAll(".decreaseGrocery");
+  decreaseQtyBtn.forEach((button) => {
+    button.addEventListener("click", () => decreaseQty(button.dataset.id));
+  });
+  // increase grocery item qty
+  const increaseQtyBtn = document.querySelectorAll(".increaseGrocery");
+  increaseQtyBtn.forEach((button) => {
+    button.addEventListener("click", () => increaseQty(button.dataset.id));
+  });
 }
 
 function estimateGroceryTotalPrice() {
@@ -145,5 +160,30 @@ calculatePriceBtn.addEventListener("click", (e) => {
   e.preventDefault();
   estimateGroceryTotalPrice();
 });
+
+function decreaseQty(key) {
+  const groceryItems = getLocalStorage("grocery-list");
+  const foundItemIndex = groceryItems.findIndex(
+    (item) => item.food.foodId === key
+  );
+  const quantity = groceryItems[foundItemIndex].GroceryQuantity;
+  if (quantity > 0) {
+    groceryItems[foundItemIndex].GroceryQuantity -= 1;
+  } else {
+    groceryItems[foundItemIndex].InventoryQuantity = 0;
+  }
+  setLocalStorage("grocery-list", groceryItems);
+  renderGroceryList();
+}
+
+function increaseQty(key) {
+  const groceryItems = getLocalStorage("grocery-list");
+  const foundItemIndex = groceryItems.findIndex(
+    (item) => item.food.foodId === key
+  );
+  groceryItems[foundItemIndex].GroceryQuantity += 1;
+  setLocalStorage("grocery-list", groceryItems);
+  renderGroceryList();
+}
 
 renderGroceryList();
