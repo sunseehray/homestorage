@@ -122,6 +122,14 @@ function renderGroceryList() {
   const htmlItems = groceryListItems.map((item) => groceryListTemplate(item));
   element.innerHTML = htmlItems.join("");
 
+  // add event listener to x button
+  const removeButtons = document.querySelectorAll(".removeFromGrocery");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", () =>
+      removeFromGrocery(button.dataset.id)
+    );
+  });
+
   // decrease grocery item quantity
   const decreaseQtyBtn = document.querySelectorAll(".decreaseGrocery");
   decreaseQtyBtn.forEach((button) => {
@@ -183,6 +191,18 @@ function increaseQty(key) {
   );
   groceryItems[foundItemIndex].GroceryQuantity += 1;
   setLocalStorage("grocery-list", groceryItems);
+  renderGroceryList();
+}
+
+function removeFromGrocery(key) {
+  // update the cart by removing the specified product
+  const groceryItems = getLocalStorage("grocery-list");
+
+  const udpatedGroceryItems = groceryItems.filter(
+    (product) => product.food.foodId != key
+  );
+  setLocalStorage("grocery-list", udpatedGroceryItems);
+
   renderGroceryList();
 }
 
