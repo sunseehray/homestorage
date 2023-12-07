@@ -82,7 +82,7 @@ function inventoryTemplate(item) {
     <div class="item-detail__add">
       <p class="inventory-card__quantity"><button class="addToGrocery btneffect" data-id="${
         item.food.foodId
-      }">📃</button><button class="removeFromInventory btneffect" data-id="${
+      }">🧺</button><button class="removeFromInventory btneffect" data-id="${
     item.food.foodId
   }">❌</button></p>
     </div>

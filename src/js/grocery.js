@@ -49,7 +49,7 @@ checkoutGroceryBtn.addEventListener("click", (e) => {
       if (itemMatch) {
         inventoryItems[itemMatchIndex].InventoryQuantity +=
           groceryItem.GroceryQuantity;
-          inventoryItems[itemMatchIndex].price = groceryItem.price;
+        inventoryItems[itemMatchIndex].price = groceryItem.price;
         setLocalStorage("inventory", inventoryItems);
       } else {
         //if item is not found, groceryItem is added to the inventory with its inventory quantity as the grocery quantity
