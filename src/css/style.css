@@ -322,6 +322,11 @@ button {
   margin: 0 1em;
 }
 
+.removeFromGrocery {
+  background-color:white;
+}
+
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
