@@ -133,12 +133,20 @@ function renderGroceryList() {
   // decrease grocery item quantity
   const decreaseQtyBtn = document.querySelectorAll(".decreaseGrocery");
   decreaseQtyBtn.forEach((button) => {
-    button.addEventListener("click", () => decreaseQty(button.dataset.id));
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      decreaseQty(button.dataset.id);
+      estimateGroceryTotalPrice();
+    });
   });
   // increase grocery item qty
   const increaseQtyBtn = document.querySelectorAll(".increaseGrocery");
   increaseQtyBtn.forEach((button) => {
-    button.addEventListener("click", () => increaseQty(button.dataset.id));
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      increaseQty(button.dataset.id);
+      estimateGroceryTotalPrice();
+    });
   });
 }
 
