@@ -18,20 +18,48 @@ function itemInfoTemplate(item) {
     if (!item.food.servingSizes) {
         serving = "";
     } else {
-        serving = `<p>Serving Size: ${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</p>`;
+        serving = `<tr>
+            <th>Serving Size</th>
+            <td>${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</td>
+        </tr>
+        `;
     }
 
     return `<section class="item-detail">
+        <h3 class="divider">${item.food.knownAs.toUpperCase()}</h3>
+        <div class="container">
         <img
             src="${image}"
             alt="${item.food.label}"
         />
-        <h3>${item.food.knownAs}</h3>
-        <p class="item-card-calories">Calories: ${item.food.nutrients.ENERC_KCAL.toFixed(0)}</p>
-        ${serving}
         <div class="item-detail__add">
-            <button id="addToInventory" data-id="${item.food.foodId}">Add to Inventory</button>
-            <button id="addToGroceryList" data-id="${item.food.foodId}">Add to Grocery List</button>
+            <button class="btneffect" id="addToInventory" data-id="${item.food.foodId}">📦</button>
+            <button class="btneffect" id="addToGroceryList" data-id="${item.food.foodId}">🧺</button>
+        </div>
+        </div>
+        <table>
+        <tr>
+            <th>Calories</th>
+            <td>${item.food.nutrients.ENERC_KCAL.toFixed(0)}</td>
+        </tr>
+        ${serving}
+        <tr>
+            <th>Carbs</th>
+            <td>${item.food.nutrients.CHOCDF.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Fat</th>
+            <td>${item.food.nutrients.FAT.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Protein</th>
+            <td>${item.food.nutrients.PROCNT.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Fiber</th>
+            <td>${item.food.nutrients.FIBTG.toFixed(1)} g</td>
+        </tr>
+        </table>
         </section>`;
 }
 
