@@ -79,3 +79,12 @@ export function changeCart() {
     cartIcon.setAttribute("src", "../images/empty-basket.jpg")
   }
 }
+
+export function wiggle(element) {
+  // Remove animation to reset it
+  element.style.animation = "none";
+  // Trigger a reflow to ensure the animation restarts
+  void element.offsetWidth;
+  element.style.animation = "wiggleAnimation 1s 1";
+
+}

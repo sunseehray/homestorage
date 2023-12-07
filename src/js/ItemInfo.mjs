@@ -1,5 +1,5 @@
 //this helps generate search results
-import { getLocalStorage, setLocalStorage, changeCart } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, changeCart, wiggle } from "./utils.mjs";
 
 function itemInfoTemplate(item) {
     let brand;
@@ -134,20 +134,11 @@ export default class ItemInfo {
 
     wiggleInventory() {
         const element = document.querySelector(".inventory-icon");
-        this.wiggle(element);
+        wiggle(element);
     }
 
     wiggleBasket() {        
         const element = document.querySelector(".cart-icon");
-        this.wiggle(element);
-    }
-
-    wiggle(element) {
-        // Remove animation to reset it
-        element.style.animation = "none";
-        // Trigger a reflow to ensure the animation restarts
-        void element.offsetWidth;
-        element.style.animation = "wiggleAnimation 1s 1";
-
+        wiggle(element);
     }
 }

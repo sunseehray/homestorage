@@ -2,6 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   loadHeaderFooter,
+  wiggle,
 } from "./utils.mjs";
 
 const headerPath = "../partials/header.html";
@@ -33,7 +34,11 @@ function renderInventory() {
   // allow users to add to grocery list
   const addToGroceryButtons = document.querySelectorAll(".addToGrocery");
   addToGroceryButtons.forEach((button) => {
-    button.addEventListener("click", () => addToGrocery(button.dataset.id));
+    button.addEventListener("click", () => {
+      addToGrocery(button.dataset.id);
+      const groceryIcon = document.querySelector(".cart-icon");
+      wiggle(groceryIcon);
+    });
   });
   // allow users to increase inventory
   const increaseInventoryBtn = document.querySelectorAll(".increaseInventory");
@@ -49,6 +54,7 @@ function renderInventory() {
 
 function inventoryTemplate(item) {
   let image;
+  let serving;
 
   if (!item.food.image) {
     image = "../images/filled-basket.jpg";
@@ -56,20 +62,31 @@ function inventoryTemplate(item) {
     image = item.food.image;
   }
 
-  const newItem = `<li class="inventory-card divider">
-  <img
-    src="${image}"
-    alt="${item.food.label}"
-  />
-  <h2 class="card__name">${item.food.knownAs}</h2>
-  <p class="inventory-card__quantity"><span class="addToGrocery btneffect" data-id="${
+  if (!item.food.servingSizes) {
+    serving = "";
+  } else {
+    serving = `<tr>
+        <th>Serving Size</th>
+        <td>${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</td>
+    </tr>
+    `;
+  }
+
+  const newItem = `<li class="inventory-card">
+  <h3 class="card__name divider">${item.food.knownAs.toUpperCase()}</h3>
+  <div class="container">
+    <img
+      src="${image}"
+      alt="${item.food.label}"
+    />
+    <div class="item-detail__add">
+      <p class="inventory-card__quantity"><button class="addToGrocery btneffect" data-id="${
+        item.food.foodId
+      }">📃</button><button class="removeFromInventory btneffect" data-id="${
     item.food.foodId
-  }">📃</span><span class="removeFromInventory btneffect" data-id="${
-    item.food.foodId
-  }">❌</span></p>
-  <p class="inventory-card__calories">${item.food.nutrients.ENERC_KCAL.toFixed(
-    0
-  )} Calories</p>
+  }">❌</button></p>
+    </div>
+  </div>
   <p class="inventory-card__quantity"><span class="decreaseInventory btneffect" data-id="${
     item.food.foodId
   }">➖</span> ${
@@ -77,6 +94,29 @@ function inventoryTemplate(item) {
   } <span class="increaseInventory btneffect" data-id="${
     item.food.foodId
   }">➕</span> in stock</p>
+  <table>
+        <tr>
+            <th>Calories</th>
+            <td>${item.food.nutrients.ENERC_KCAL.toFixed(0)}</td>
+        </tr>
+        ${serving}
+        <tr>
+            <th>Carbs</th>
+            <td>${item.food.nutrients.CHOCDF.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Fat</th>
+            <td>${item.food.nutrients.FAT.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Protein</th>
+            <td>${item.food.nutrients.PROCNT.toFixed(1)} g</td>
+        </tr>
+        <tr>
+            <th>Fiber</th>
+            <td>${item.food.nutrients.FIBTG.toFixed(1)} g</td>
+        </tr>
+        </table>  
 </li>`;
 
   return newItem;
