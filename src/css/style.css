@@ -212,7 +212,9 @@ button {
 .product-card h3,
 .product-card p,
 .item-detail h3,
-.item-detail p {
+.item-detail p,
+.grocery-card h3,
+.grocery-card p {
   margin: 0.5em 0;
 }
 
@@ -277,8 +279,7 @@ button {
 }
 
 /* inventory page */
-.inventory,
-.grocery {
+.inventory {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -290,6 +291,37 @@ button {
   flex-direction: column;
   align-items: center;
 }
+
+.grocery-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.card__price, .card__quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.input-price {
+  font-size: 1em;
+  width: 50%;
+  font-family: var(--font-body);
+}
+
+.card__price__amount {
+  margin: .5em;
+}
+
+.grocery__quantity__value {
+  margin: 0 1em;
+}
+
+
 
 /* Start cart list card styles */
 .cart-card {
