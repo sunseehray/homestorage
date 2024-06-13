@@ -2,22 +2,16 @@
 import { getLocalStorage, setLocalStorage, changeCart, wiggle } from "./utils.mjs";
 
 function itemInfoTemplate(item) {
-    let brand;
-    let image;
-    let serving;
-    if (!item.food.brand) {
-        brand = "";
-    } else {
+    let brand = "";
+    let image = "../images/filled-basket.jpg";
+    let serving = "";
+    if (item.food.brand) {
         brand = item.food.brand;
     }
-    if (!item.food.image) {
-        image = "../images/filled-basket.jpg";
-    } else {
+    if (item.food.image) {
         image = item.food.image;
     }
-    if (!item.food.servingSizes) {
-        serving = "";
-    } else {
+    if (item.food.servingSizes) {
         serving = `<tr>
             <th>Serving Size</th>
             <td>${item.food.servingSizes[0].quantity} ${item.food.servingSizes[0].label}</td>
