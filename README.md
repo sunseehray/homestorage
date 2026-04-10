@@ -3,11 +3,14 @@ https://polite-croquembouche-f567d2.netlify.app/
 
 ## Description
 
-Use this as a starting point to complete the WDD 330 team activity: the SleepOutside web application. It scaffolds out a simple web app with Vite support to bundle up our assets.
+Project based on WDD 330 course from BYUI team activity: the SleepOutside web application. It scaffolds out a simple web app with Vite support to bundle up assets.
 
 ## Prerequisites
 
-- You must have Node installed. visit https://byui-cit.github.io/advcss/lesson01/l01-software.html and skip to the Node section for instructions
+- Must have Node installed. 
+
+## References
+[WDD 330 Lesson 1](https://byui-cit.github.io/advcss/lesson01/l01-software.html) and skip to the Node section for instructions
 
 ## Setup
 
@@ -16,6 +19,6 @@ Use this as a starting point to complete the WDD 330 team activity: the SleepOut
 
 ## Other commands
 
-- `npm run build` to build final files when you are ready to turn in.
-- `npm run lint` to run ESLint against your code to find errors.
-- `npm run format` to run Prettier to automatically format your code.
+- `npm run build` to build final files.
+- `npm run lint` to run ESLint against code to find errors.
+- `npm run format` to run Prettier to automatically format code.
